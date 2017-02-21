@@ -1,3 +1,4 @@
+
 """
 Title:  Scaling Configuration Set Checker
 
@@ -17,7 +18,8 @@ This has been tested on Windows 10.
 Revision History:
 Date          Ver   Author          Description
 2016/06/14    1.0   Nick            Initial release, created with Python 2.7.11.
-
+2017/02/21    1.1   Nick            Updated the IFL conditional to avoid words list out of bounds error 
+                                    from certain configurations.
 """
 
 import sys      # For command line arguments.
@@ -45,7 +47,7 @@ for line in open(configFile, "r").read().splitlines():
       listIFD.append(words[2])
 
   # If the IFL doesn't exist in its list, then add it.
-  if 'set interfaces ' in line and 'unit' in line:
+  if 'set interfaces ' in line and ' unit ' in line:
     words = line.split(' ')
     ifl = words[2] + '.' + words[4]
     if ifl not in listIFL:
